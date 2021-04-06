@@ -1,5 +1,3 @@
-import pandas as pd
-
 
 class Profile:
 
@@ -17,21 +15,19 @@ class Profile:
 class Interest:
 
     def __init__(self):
-        self.interests = set()
         self.profiles = list()
+        self.interests = set()
 
     def insert_profile(self, profile: Profile):
         self.profiles.append(profile)
         self.interests.update(profile.get_interests())
-        # TODO: generate a profile dataframe
-        return None
 
-    def show_interests(self):
-        print(self.interests)
+    def get_interests(self):
+         return self.interests
 
 
 # politics, soccer, music, car, films
-user1 = Profile("user1", ["politics, soccer"])
+user1 = Profile("user1", ["politics", "soccer"])
 user2 = Profile("user2", ["music", "films"])
 user3 = Profile("user3", ["car", "politics"])
 user4 = Profile("user4", ["soccer"])

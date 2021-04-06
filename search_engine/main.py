@@ -1,6 +1,7 @@
 import sys
 from document_retriever import DocumentRetriever
 from data_builder import DataBuilder
+from data_trainer import DataTrainer
 
 
 def main():
@@ -10,9 +11,12 @@ def main():
         data_builder.build_training_data()
 
     doc = input("Enter a document to match users' interests: ")
+    dt = DataTrainer()
+    dt.train_documents()
     dr = DocumentRetriever()
     matched_user = dr.match_document_with_user(doc)
-    print("The matched user is [", matched_user.name, "] with interest in", matched_user.interest)
+    print(matched_user)
+    # print("The matched user is [", matched_user.name, "] with interest in", matched_user.interest)
 
 
 if __name__ == '__main__':
