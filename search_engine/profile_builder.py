@@ -27,9 +27,9 @@ class Interest:
 
     def get_users_interested_in(self, interest):
         users = []
-        for each in self.profiles:
-            if each.interest == interest:
-                users.append(each)
+        for each_p in self.profiles:
+            if interest in each_p.interest:
+                users.append(each_p)
         return users
 
 

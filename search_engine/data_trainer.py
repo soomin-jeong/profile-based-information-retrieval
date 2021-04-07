@@ -29,7 +29,7 @@ class DataTrainer:
 
     def predict_interest(self, doc):
         ml_pred = self.ml_model_builder.predict(doc)
-        return ml_pred
+        return ml_pred[0]
 
 
 
