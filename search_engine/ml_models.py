@@ -3,7 +3,9 @@ import pickle
 
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import Pipeline
 
 from search_engine.data_preprocessor import preprocess_sentence
 
@@ -53,27 +55,26 @@ class NaiveBayesClassifier(MachineLearningModel):
     def vectorizer_name(self):
         return 'tfidf_vec'
 
-    def train_model(self, x_train, y_train, x_test, y_test):
-        vec_train = self.vectorizer.fit_transform(x_train)
-        model = MultinomialNB()
-        model.fit(vec_train, y_train)
-        accuracy = self.evaluate(x_test, y_test)
+    def train_model(self, x_train, x_test, y_train, y_test):
+        model = Pipeline([('count_vec', CountVectorizer()),
+                           ('tfidf', TfidfTransformer()),
+                           ('nb', MultinomialNB())])
+
+        model.fit(x_train, y_train)
+        self.trained_model = model
+
+        predicted = model.predict(x_test)
+        accuracy = np.mean(predicted == y_test)
         print("Accuracy: ", accuracy)
         with open(self.model_fp, "wb") as f, open(self.vec_fp, "wb") as vf:
             pickle.dump(model, f)
-            pickle.dump(self.vectorizer, vf)
         return model
 
-    def evaluate(self, x_test, y_test):
-        self.vectorizer = self.load_vectorizer()
-        vec_test = self.vectorizer.transform(x_test)
-        predicted = self.load_model().predict(vec_test)
-        return np.mean(predicted == y_test)
-
     def predict(self, doc):
-        self.vectorizer = self.load_vectorizer()
-        vectorized_doc = self.vectorizer.transform([doc])
-        return self.trained_model.predict(vectorized_doc)
+        # self.vectorizer = self.load_vectorizer()
+        # vectorized_doc = self.vectorizer.transform([doc])
+        model = self.trained_model or self.load_model()
+        return model.predict([doc])
 
 # class DecisionTreeClassifier(MachineLearningModel):
 #     def __init__(self):

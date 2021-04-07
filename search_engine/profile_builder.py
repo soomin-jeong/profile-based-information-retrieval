@@ -23,7 +23,14 @@ class Interest:
         self.interests.update(profile.get_interests())
 
     def get_interests(self):
-         return self.interests
+        return self.interests
+
+    def get_users_interested_in(self, interest):
+        users = []
+        for each in self.profiles:
+            if each.interest == interest:
+                users.append(each)
+        return users
 
 
 # politics, soccer, music, car, films

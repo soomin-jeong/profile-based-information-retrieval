@@ -14,9 +14,11 @@ def main():
     dt = DataTrainer()
     dt.train_documents()
     dr = DocumentRetriever()
-    matched_user = dr.match_document_with_user(doc)
-    print(matched_user)
-    # print("The matched user is [", matched_user.name, "] with interest in", matched_user.interest)
+
+    pred = dr.match_document_with_interset(doc)
+    matched_users = dr.match_document_with_user(pred)
+    names = [each.name for each in matched_users]
+    print("The matched user is [", names, "] with interest in", pred)
 
 
 if __name__ == '__main__':
