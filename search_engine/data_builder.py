@@ -1,11 +1,9 @@
 import os
 
-
 from bs4 import BeautifulSoup
 from profile_builder import interest_integrater
 from selenium import webdriver
-
-from search_engine.utils import save_data
+from utils import save_data
 
 DATA_SAVE_DIR = 'data'
 
@@ -48,7 +46,12 @@ class DataBuilder:
         filepath = os.path.join(DATA_SAVE_DIR, topic)
         save_data(filepath, data)
 
-    def build_training_data(self):
-        for each in interest_integrater.interests:
-            print("Crawling about", each)
+    def build_training_data(self, new_topics=None):
+        topics = [interest_integrater.interests]
+
+        if new_topics:
+            topics = [each for each in new_topics if each not in interest_integrater.interests]
+
+        for each in topics:
+            print("Crawling about {}... Please wait...".format(each))
             self.crawl_euronews(each)

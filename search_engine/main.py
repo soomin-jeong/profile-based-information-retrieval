@@ -17,7 +17,7 @@ def main():
         print(msg)
 
     # to crawl documents about the topics in user profiles
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 1:
         if '--rebuild' in sys.argv:
             db.build_training_data()
             dt.train_documents()
@@ -27,11 +27,11 @@ def main():
 
         if '--new-user' in sys.argv:
             interests = input("Enter your interests. Please divide by comma(,). :")
-            interests = interests.split(',')
+            interests = [x.strip() for x in interests.split(',')]
+            db.build_training_data(new_topics=interests)
+            dt.train_documents()
             new_profile = Profile(name='user{}'.format(uuid.uuid4()), interest=interests)
             interest_integrater.insert_profile(new_profile)
-            db.build_training_data()
-            dt.train_documents()
 
     doc = input("Enter a document to match users' interests:")
 

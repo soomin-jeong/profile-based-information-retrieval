@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 
 from profile_builder import interest_integrater
 from data_builder import DATA_SAVE_DIR
-from search_engine.ml_models import ml_factory
+from ml_models import ml_factory
 
 
 class DataTrainer:
