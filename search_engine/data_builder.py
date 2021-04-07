@@ -5,8 +5,9 @@ from bs4 import BeautifulSoup
 from profile_builder import interest_integrater
 from selenium import webdriver
 
+from search_engine.utils import save_data
 
-SAVE_DIR = 'data'
+DATA_SAVE_DIR = 'data'
 
 
 class DataBuilder:
@@ -44,19 +45,8 @@ class DataBuilder:
                     title += contents.text.strip()
                 data.append(title)
         driver.quit()
-        filepath = os.path.join(SAVE_DIR, topic)
-        self.save_data(filepath, data)
-
-    def save_data(self, filepath: str, data: list):
-        try:
-            f = open(filepath, 'w')
-        except IOError:
-            os.makedirs(os.path.dirname(filepath), exist_ok=True)
-            f = open(filepath, 'w')
-        finally:
-            for item in data:
-                f.write("%s\n" % item)
-            f.close()
+        filepath = os.path.join(DATA_SAVE_DIR, topic)
+        save_data(filepath, data)
 
     def build_training_data(self):
         for each in interest_integrater.interests:
