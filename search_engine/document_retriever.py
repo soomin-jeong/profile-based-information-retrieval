@@ -1,10 +1,8 @@
 from profile_builder import interest_integrater, Profile
-from data_trainer import DataTrainer
 
 
 class DocumentRetriever:
-    def match_document_with_interset(self, doc: str) -> str:
-        dt = DataTrainer()
+    def match_document_with_interset(self, dt, doc: str) -> str:
         predicted_interest = dt.predict_interest(doc)
         return predicted_interest
 
