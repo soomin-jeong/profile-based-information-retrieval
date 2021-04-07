@@ -4,12 +4,10 @@ from sklearn.model_selection import train_test_split
 
 from profile_builder import interest_integrater
 from data_builder import DATA_SAVE_DIR
+from search_engine.ml_models import ml_factory
 
 
 class DataTrainer:
-    def __init__(self, ml_model):
-        self.ml_model = ml_model()
-
     def get_training_test_data(self) -> list:
         interests = interest_integrater.get_interests()
         filepaths = [os.path.join(DATA_SAVE_DIR, each) for each in interests]
@@ -24,11 +22,10 @@ class DataTrainer:
         return train_test_split(texts, labels, test_size=.3, random_state=1)
 
     def train_documents(self):
-        return self.ml_model.get_trained_model(*self.get_training_test_data())
+        ml_factory.train_model(*self.get_training_test_data())
 
     def predict_interest(self, doc):
-        # ml_pred = self.ml_model_builder.predict(doc)
-        ml_pred = self.ml_model.predict(doc)
+        ml_pred = ml_factory.predict(doc)
         return ml_pred[0]
 
 

@@ -14,8 +14,8 @@ from sklearn.model_selection import GridSearchCV
 class MachineLearningModel:
     def __init__(self, model_name: str, pipeline: Pipeline):
         self.trained_model = None
-        self.model_fp = os.path.join('models', self.model_name)
         self.model_name = model_name
+        self.model_fp = os.path.join('models', self.model_name)
         self.pipeline = pipeline
 
     def load_model(self):
@@ -48,25 +48,23 @@ class MachineLearningModel:
             pickle.dump(model, f)
 
 
-naive_bayes_pipeline = Pipeline([('count_vec', CountVectorizer()),
-                                 ('tfidf', TfidfTransformer()),
-                                 ('nb', MultinomialNB(fit_prior=False))])
-NaiveBayesClassifier = MachineLearningModel('NaiveBayes', naive_bayes_pipeline)
+NaiveBayesClassifier = MachineLearningModel('NaiveBayes', Pipeline([('count_vec', CountVectorizer()),
+                                                                    ('tfidf', TfidfTransformer()),
+                                                                    ('nb', MultinomialNB(fit_prior=False))]))
 
-svm_pipeline = Pipeline([('count_vec', CountVectorizer()),
-                         ('tfidf', TfidfTransformer()),
-                         ('svm', SGDClassifier(random_state=1))])
-SVMClassifier = MachineLearningModel('SVM', svm_pipeline)
+SVMClassifier = MachineLearningModel('SVM', Pipeline([('count_vec', CountVectorizer()),
+                                                      ('tfidf', TfidfTransformer()),
+                                                      ('svm', SGDClassifier(random_state=1))]))
 
-dt_pipeline = Pipeline([('count_vec', CountVectorizer()),
-                          ('tfidf', TfidfTransformer()),
-                          ('dt', DecisionTreeClassifier(max_depth=8, random_state=4))])
-DecisionTree = MachineLearningModel('DecisionTree', dt_pipeline)
+DecisionTree = MachineLearningModel('DecisionTree', Pipeline([('count_vec', CountVectorizer()),
+                                                              ('tfidf', TfidfTransformer()),
+                                                              ('dt', DecisionTreeClassifier(max_depth=8,
+                                                                                            random_state=4))]))
 
-rf_pipeline = Pipeline([('count_vec', CountVectorizer()),
-                          ('tfidf', TfidfTransformer()),
-                          ('rf', RandomForestClassifier(max_depth=10, random_state=4))])
-RandomForest = MachineLearningModel('RandomForest', rf_pipeline)
+RandomForest = MachineLearningModel('RandomForest', Pipeline([('count_vec', CountVectorizer()),
+                                                              ('tfidf', TfidfTransformer()),
+                                                              ('rf', RandomForestClassifier(max_depth=10,
+                                                                                            random_state=4))]))
 
 
 class MachineLearningModelFactory:

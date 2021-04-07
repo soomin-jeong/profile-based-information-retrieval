@@ -5,14 +5,10 @@ from document_retriever import DocumentRetriever
 from data_builder import DataBuilder
 from data_trainer import DataTrainer
 from profile_builder import Profile, interest_integrater
-from search_engine.ml_models import NaiveBayesClassifier, SVMClassifier, DecisionTree, RandomForest
 
 
 def main():
-    # dt = DataTrainer(NaiveBayesClassifier)
-    # dt = DataTrainer(SVMClassifier)
-    # dt = DataTrainer(DecisionTree)
-    dt = DataTrainer(RandomForest)
+    dt = DataTrainer()
     db = DataBuilder()
     dr = DocumentRetriever()
 
