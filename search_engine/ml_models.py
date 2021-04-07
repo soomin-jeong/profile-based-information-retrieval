@@ -53,7 +53,7 @@ class NaiveBayesClassifier(MachineLearningModel):
         predicted = model.predict(x_test)
         accuracy = np.mean(predicted == y_test)
         print("Accuracy: ", accuracy)
-        with open(self.model_fp, "wb") as f, open(self.vec_fp, "wb") as vf:
+        with open(self.model_fp, "wb") as f:
             pickle.dump(model, f)
         return model
 
