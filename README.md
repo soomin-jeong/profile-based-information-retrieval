@@ -20,3 +20,4 @@ Information retrieval system based on a personal profile (preference)
 # Acknowledgement
     This project referred to [this article](https://towardsdatascience.com/machine-learning-nlp-text-classification-using-scikit-learn-python-and-nltk-c52b92a7c73a
 ).
+    The machine learning models were built on the articles on the [Euronews](https://www.euronews.com).
