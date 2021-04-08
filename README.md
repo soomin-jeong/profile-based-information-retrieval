@@ -19,4 +19,4 @@ This project is developed to find a user whose interests fit the most to a given
 # Acknowledgement
 This project was inspired by [this article](https://towardsdatascience.com/machine-learning-nlp-text-classification-using-scikit-learn-python-and-nltk-c52b92a7c73a
 ).
-The machine learning models were built on the articles on the [Euronews](https://www.euronews.com).
+The machine learning models were trained on the news articles on the [Euronews](https://www.euronews.com).
