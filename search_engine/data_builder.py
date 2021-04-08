@@ -10,7 +10,7 @@ DATA_SAVE_DIR = 'data'
 
 class DataBuilder:
 
-    def crawl_euronews(self, topic:str):
+    def crawl_euronews(self, topic: str):
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--headless")
 
@@ -47,7 +47,7 @@ class DataBuilder:
         save_data(filepath, data)
 
     def build_training_data(self, new_topics=None):
-        topics = [interest_integrater.interests]
+        topics = interest_integrater.interests
 
         if new_topics:
             topics = [each for each in new_topics if each not in interest_integrater.interests]
