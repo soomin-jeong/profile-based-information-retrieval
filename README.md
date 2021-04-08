@@ -1,6 +1,5 @@
 # profile-based-information-retrieval
-Information retrieval system based on a personal profile (preference)
-
+This project is developed to find a user whose interests fit the most to a given document. You may find the backgrounds and intention from a file called `profile_based_information_retrieval.pdf`.
 # Installation
     pip -r install requirements.txt
 
